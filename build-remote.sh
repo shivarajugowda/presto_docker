@@ -13,6 +13,7 @@ if [[ $# -lt 1 ]]; then
 fi
 
 PRESTO_VERSION=$1
+DOCKER_TAG="${DOCKER_ID_USER}:${PRESTO_VERSION}"
 PRESTO_LOCATION="https://repo1.maven.org/maven2/io/prestosql/presto-server/${PRESTO_VERSION}/presto-server-${PRESTO_VERSION}.tar.gz"
 CLIENT_LOCATION="https://repo1.maven.org/maven2/io/prestosql/presto-cli/${PRESTO_VERSION}/presto-cli-${PRESTO_VERSION}-executable.jar"
 
@@ -41,11 +42,14 @@ cp -R bin default ${WORK_DIR}/presto-server-${PRESTO_VERSION}
 curl -o ${WORK_DIR}/presto-cli-${PRESTO_VERSION}-executable.jar ${CLIENT_LOCATION}
 chmod +x ${WORK_DIR}/presto-cli-${PRESTO_VERSION}-executable.jar
 
-docker build ${WORK_DIR} -f Dockerfile -t "presto:${PRESTO_VERSION}" --build-arg "PRESTO_VERSION=${PRESTO_VERSION}"
+docker build ${WORK_DIR} -f Dockerfile -t "${DOCKER_TAG}" --build-arg "PRESTO_VERSION=${PRESTO_VERSION}"
 
 rm -r ${WORK_DIR}
 
 # Source common testing functions
 . container-test.sh
 
-test_container "presto:${PRESTO_VERSION}"
+test_container "${DOCKER_TAG}"
+
+docker login -u ${DOCKER_ID_USER} -p ${DOCKER_ACCESS_TOKEN}
+docker push "${DOCKER_TAG}"
