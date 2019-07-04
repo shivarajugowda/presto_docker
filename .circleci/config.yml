@@ -11,6 +11,8 @@ jobs:
           command: |
             apk add --no-cache \
               py-pip=9.0.0-r1
+            apk add --no-cache \
+              bash
             pip install \
               docker-compose==1.12.0 \
               awscli==1.11.76
