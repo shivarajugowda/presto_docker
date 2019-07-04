@@ -1,3 +1,6 @@
+
+[![CircleCI](https://circleci.com/gh/shivarajugowda/presto_docker.svg?style=svg)](https://circleci.com/gh/shivarajugowda/presto_docker)
+
 # Presto Docker Image
 
 ## About the Container
