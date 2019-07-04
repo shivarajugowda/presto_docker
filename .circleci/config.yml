@@ -5,13 +5,13 @@ jobs:
       - image: circleci/python:3.7.3
     steps:
       - checkout
-      - run: cd project; build-remote.sh 315
+      - run: ./build-remote.sh 315
   test:
     docker:
             - image: circleci/python:3.7.3
     steps:
       - checkout
-      - run: cd project; build-remote.sh 315
+      - run: ./build-remote.sh 315
 workflows:
   version: 2
   build_and_test:
