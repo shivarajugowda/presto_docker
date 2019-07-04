@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker:centos/centos7
+      - image: centos:centos7
     steps:
       - checkout
       - setup_remote_docker
