@@ -2,13 +2,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: circleci/python:3.7.3
     steps:
       - checkout
       - run: build-remote.sh
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+            - image: circleci/python:3.7.3
     steps:
       - checkout
       - run: build-remote.sh
