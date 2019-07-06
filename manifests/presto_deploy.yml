@@ -33,11 +33,11 @@ spec:
             cpu: "2.0"
         readinessProbe:
           exec:
-            command: ["presto"]
-            args: ["--execute", "'SELECT 1'"]
-          initialDelaySeconds: 10
+            command:
+            - bash -c presto --execute 'SELECT 1'
+          initialDelaySeconds: 2
           periodSeconds: 2
-          timeoutSeconds: 90
+          timeoutSeconds: 60
         livenessProbe:
           tcpSocket:
             port: 8080
