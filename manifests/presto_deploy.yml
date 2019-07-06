@@ -14,7 +14,6 @@ metadata:
   labels:
     presto: coordinator
 spec:
-  replicas: 2
   selector:
     matchLabels:
       presto: coordinator
@@ -49,6 +48,27 @@ spec:
         ports:
         - containerPort: 8080
       restartPolicy: Always
+
+---
+
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: coordinator
+  namespace: default
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: coordinator
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
 
 ---
 
