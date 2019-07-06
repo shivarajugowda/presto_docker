@@ -23,7 +23,7 @@ spec:
         presto: coordinator
     spec:
       containers:
-      - image: docker.io/shivarajugowda/prestosql:315
+      - image: docker.io/shivarajugowda/prestosql
         resources:
           requests:
             memory: "4.5Gi"
