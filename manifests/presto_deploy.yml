@@ -34,7 +34,7 @@ spec:
         readinessProbe:
           exec:
             command:
-            - bash -c presto --execute 'SELECT 1'
+            - presto --version
           initialDelaySeconds: 2
           periodSeconds: 2
           timeoutSeconds: 60
