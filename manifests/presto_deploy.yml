@@ -51,13 +51,13 @@ spec:
 
 ---
 
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: coordinator
-  namespace: default
 spec:
   scaleTargetRef:
+    apiVersion: apps/v1beta2      
     kind: Deployment
     name: coordinator
   minReplicas: 1
