@@ -6,21 +6,24 @@ data:
   NEW_FEATURE: "true"
 
 ---
-apiVersion: v1
 kind: Deployment
+apiVersion: apps/v1beta2
 metadata:
-  name: presto-coordinator
+  name: coordinator
   labels:
-    app: presto
+    presto: coordinator
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
-        app: presto
+        presto: coordinator
     spec:
       containers:
-      - image: gcr.io/kaggle-218610/presto_jdk8
+      - env:
+        - name: PRESTO_JVM_HEAP_SIZE
+          value: "4"
+        image: gcr.io/kaggle-218610/presto_jdk8
         resources:
           requests:
             memory: "4.5Gi"
@@ -42,18 +45,18 @@ spec:
         ports:
         - containerPort: 8080
       restartPolicy: Always
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: presto-svc
+  name: presto
+  labels:
+    app: presto
 spec:
   selector:
-    app: presto
+    presto: coordinator
   type: ClusterIP  
-  #type: LoadBalancer
-  #sessionAffinity: ClientIP
-  ports: 
+    #type: LoadBalancer
+    #sessionAffinity: ClientIP
+    ports: 
     - port: 8080
-
