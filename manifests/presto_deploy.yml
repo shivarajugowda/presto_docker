@@ -16,7 +16,8 @@ metadata:
 spec:
   replicas: 2
   selector:
-    presto: coordinator
+    matchLabels:
+      presto: coordinator
   template:
     metadata:
       labels:
