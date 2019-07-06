@@ -59,4 +59,4 @@ spec:
     #type: LoadBalancer
     #sessionAffinity: ClientIP
     ports: 
-    - port: 8080
+      - port: 8080
