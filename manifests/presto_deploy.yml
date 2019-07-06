@@ -23,10 +23,7 @@ spec:
         presto: coordinator
     spec:
       containers:
-      - env:
-        - name: PRESTO_JVM_HEAP_SIZE
-          value: "4"
-        image: gcr.io/kaggle-218610/presto_jdk8
+      - image: gcr.io/kaggle-218610/presto_jdk8
         resources:
           requests:
             memory: "4.5Gi"
@@ -35,10 +32,12 @@ spec:
             memory: "5.0Gi"
             cpu: "2.0"
         readinessProbe:
-          tcpSocket:
-            port: 8080
+          exec:
+            command:
+            - presto --execute 'SELECT 1'
           initialDelaySeconds: 2
           periodSeconds: 2
+          failureThreshold: 10
         livenessProbe:
           tcpSocket:
             port: 8080
