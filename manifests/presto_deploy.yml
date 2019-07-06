@@ -38,8 +38,8 @@ spec:
         readinessProbe:
           tcpSocket:
             port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
+          initialDelaySeconds: 2
+          periodSeconds: 2
         livenessProbe:
           tcpSocket:
             port: 8080
