@@ -55,8 +55,8 @@ metadata:
 spec:
   selector:
     presto: coordinator
-  type: ClusterIP  
+    #type: ClusterIP  
     #type: LoadBalancer
     #sessionAffinity: ClientIP
-    ports: 
-      - port: 8080
+  ports: 
+    - port: 8080
