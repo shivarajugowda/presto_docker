@@ -34,7 +34,7 @@ spec:
         readinessProbe:
           exec:
             command:
-            - java -jar /usr/bin/presto --execute 'select 1'
+            - java -jar  /usr/bin/presto --execute 'select 1'
           initialDelaySeconds: 2
           periodSeconds: 2
           timeoutSeconds: 60
