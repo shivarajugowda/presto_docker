@@ -31,7 +31,7 @@ spec:
             memory: "10.0Gi"
             cpu: "1.5"
           limits:
-            memory: "11.0Gi"
+            memory: "11.2Gi"
             cpu: "2.0"
         readinessProbe:
           httpGet:
