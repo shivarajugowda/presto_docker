@@ -16,7 +16,6 @@ metadata:
   labels:
     presto: coordinator
 spec:
-  replicas: 1
   selector:
     matchLabels:
       presto: coordinator
