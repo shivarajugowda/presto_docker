@@ -26,6 +26,7 @@ spec:
     spec:
       containers:
       - image: gcr.io/kaggle-218610/presto_jdk8 #docker.io/shivarajugowda/prestosql:315
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             memory: "10.0Gi"
