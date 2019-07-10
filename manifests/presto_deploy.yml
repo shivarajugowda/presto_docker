@@ -28,10 +28,10 @@ spec:
       - image: gcr.io/kaggle-218610/presto_jdk8 #docker.io/shivarajugowda/prestosql:315
         resources:
           requests:
-            memory: "4.2Gi"
+            memory: "10.0Gi"
             cpu: "1.5"
           limits:
-            memory: "4.5Gi"
+            memory: "11.0Gi"
             cpu: "2.0"
         readinessProbe:
           httpGet:
