@@ -84,3 +84,57 @@ spec:
   - port: 8080
 
 
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: presto-gateway
+  namespace: prod
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: presto-svc
+  namespace: prod
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - presto-gateway
+  http:
+  - match:
+    - port: 80
+    route:
+    - destination:
+        host: presto
+        port:
+          number: 8080
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: presto-dr
+  namespace: prod
+spec:
+  host: presto
+  trafficPolicy:
+    loadBalancer:
+      #simple: ROUND_ROBIN
+      consistentHash:
+         httpCookie:
+           name: user
+           ttl: 0s
+
+
+
