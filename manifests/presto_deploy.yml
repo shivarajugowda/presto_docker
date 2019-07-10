@@ -58,6 +58,7 @@ metadata:
   namespace: prod
 spec:
   scaleTargetRef:
+    apiVersion: extensions/v1beta1
     kind: Deployment
     name: coordinator
   minReplicas: 1
