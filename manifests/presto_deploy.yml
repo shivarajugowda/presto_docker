@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: td-config
+  namespace: prod
 data:
   NEW_FEATURE: "true"
 
@@ -11,6 +12,7 @@ kind: Deployment
 apiVersion: apps/v1beta2
 metadata:
   name: coordinator
+  namespace: prod
   labels:
     presto: coordinator
 spec:
@@ -53,6 +55,7 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: presto-auto-scaler
+  namespace: prod
 spec:
   scaleTargetRef:
     kind: Deployment
@@ -71,6 +74,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: presto
+  namespace: prod
   labels:
     app: presto
 spec:
