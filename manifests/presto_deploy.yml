@@ -26,7 +26,7 @@ spec:
       - image: docker.io/shivarajugowda/prestosql:315
         resources:
           requests:
-            memory: "4.0Gi"
+            memory: "4.2Gi"
             cpu: "1.5"
           limits:
             memory: "4.5Gi"
