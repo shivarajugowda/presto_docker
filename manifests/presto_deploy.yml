@@ -64,7 +64,7 @@ spec:
     kind: Deployment
     name: coordinator
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 6
   metrics:
   - type: Resource
     resource:
