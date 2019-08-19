@@ -11,33 +11,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-#FROM centos:centos7
 FROM openjdk:8-alpine
-#FROM adoptopenjdk/openjdk11:alpine
 LABEL maintainer="Presto community <https://prestosql.io/community.html>"
 
 ENV JAVA_HOME /usr/lib/jvm/default-jvm
+ENV PRESTO_HOME /presto
+ENV PRESTO_USER presto
+ENV PRESTO_CONF_DIR ${PRESTO_HOME}/etc
+ENV PATH $PATH:$PRESTO_HOME/bin
+
 RUN \
     set -xeu && \
-    #yum -y -q update && \
-    #yum -y -q install java-11-openjdk-devel less && \
-    #yum -q clean all && \
-    #rm -rf /var/cache/yum && \
-    #rm -rf /tmp/* /var/tmp/* && \
-    #groupadd presto --gid 1000 && \
-    #useradd presto --uid 1000 --gid 1000 && \
     apk add --no-cache bash && \
     apk add --no-cache python && \
+    apk add --no-cache curl && \
+    mkdir -p ${PRESTO_HOME} ${PRESTO_HOME}/data && \
     addgroup -g 1000 presto  && \
-    adduser -D -u 1000 -G presto presto && \
-    mkdir -p /usr/lib/presto /data/presto && \
-    chown -R "presto:presto" /usr/lib/presto /data/presto
+    adduser -D -u 1000 -h ${PRESTO_HOME} -s /bin/bash -G $PRESTO_USER $PRESTO_USER && \
+    chown -R ${PRESTO_USER}:${PRESTO_USER} $PRESTO_HOME
 
 ARG PRESTO_VERSION
-ARG CLIENT_VERSION=${PRESTO_VERSION}
-COPY presto-cli-${CLIENT_VERSION}-executable.jar /usr/bin/presto
-COPY --chown=presto:presto presto-server-${PRESTO_VERSION} /usr/lib/presto
+COPY presto-cli-${PRESTO_VERSION}-executable.jar $PRESTO_HOME/bin/presto
+COPY --chown=presto:presto presto-server-${PRESTO_VERSION}/ $PRESTO_HOME/
 
 EXPOSE 8080
-USER presto:presto
-CMD ["/usr/lib/presto/bin/run-presto"]
+USER $PRESTO_USER
+
+CMD ["launcher", "run"]

@@ -37,7 +37,7 @@ rm -rf ${WORK_DIR}/presto-server-${PRESTO_VERSION}/plugin/sqlserver
 rm -rf ${WORK_DIR}/presto-server-${PRESTO_VERSION}/plugin/kudu
 rm -rf ${WORK_DIR}/presto-server-${PRESTO_VERSION}/plugin/geospatial
 
-cp -R bin default ${WORK_DIR}/presto-server-${PRESTO_VERSION}
+cp -R bin default/ ${WORK_DIR}/presto-server-${PRESTO_VERSION}
 
 curl -o ${WORK_DIR}/presto-cli-${PRESTO_VERSION}-executable.jar ${CLIENT_LOCATION}
 chmod +x ${WORK_DIR}/presto-cli-${PRESTO_VERSION}-executable.jar
