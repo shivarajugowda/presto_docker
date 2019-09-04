@@ -11,7 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-FROM openjdk:8-alpine
+#FROM openjdk:8-alpine
+FROM hirokimatsumoto/alpine-openjdk-11
 LABEL maintainer="Presto community <https://prestosql.io/community.html>"
 
 ENV JAVA_HOME /usr/lib/jvm/default-jvm

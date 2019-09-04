@@ -13,7 +13,8 @@ if [[ $# -lt 1 ]]; then
 fi
 
 PRESTO_VERSION=$1
-DOCKER_TAG="${DOCKER_ID_USER}/prestosql:latest"
+#DOCKER_TAG="${DOCKER_ID_USER}/prestosql:latest"
+DOCKER_TAG="${DOCKER_ID_USER}/prestosql:jdk11"
 PRESTO_LOCATION="https://repo1.maven.org/maven2/io/prestosql/presto-server/${PRESTO_VERSION}/presto-server-${PRESTO_VERSION}.tar.gz"
 CLIENT_LOCATION="https://repo1.maven.org/maven2/io/prestosql/presto-cli/${PRESTO_VERSION}/presto-cli-${PRESTO_VERSION}-executable.jar"
 
