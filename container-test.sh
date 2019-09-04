@@ -2,8 +2,6 @@
 
 set -euxo pipefail
 
-CONTAINER_ID=
-
 function cleanup {
     if [[ ! -z ${CONTAINER_ID:-} ]]; then
         docker stop "${CONTAINER_ID}"
